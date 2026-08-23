@@ -24,7 +24,7 @@ class AnnouncementInput(BaseModel):
 
 
 def _require_teacher(teacher_username: Optional[str]) -> Dict[str, Any]:
-    """Verify a teacher_username belongs to a signed in teacher, raising 401 otherwise."""
+    """Verify teacher_username belongs to an existing teacher, raising 401 otherwise."""
     if not teacher_username:
         raise HTTPException(
             status_code=401, detail="Authentication required for this action")
