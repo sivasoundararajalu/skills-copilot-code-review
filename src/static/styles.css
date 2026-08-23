@@ -672,3 +672,150 @@ footer {
   padding: 15px;
   font-weight: bold;
 }
+
+.announcement-banner + .announcement-banner {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.announcement-icon {
+  font-size: 1rem;
+}
+
+/* Generic form styling shared by the modal dialogs */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background-color: var(--surface);
+  color: var(--text-primary);
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.form-row .form-group {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Manage Announcements dialog */
+.announcements-modal-content {
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.announcement-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.secondary-button {
+  background-color: var(--border);
+  color: var(--text-primary);
+}
+
+.secondary-button:hover {
+  background-color: var(--border-focus);
+}
+
+.announcements-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 18px 0 12px;
+}
+
+.announcements-modal-content h4 {
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.announcements-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.announcement-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background-color: var(--background);
+}
+
+.announcement-item-content {
+  min-width: 0;
+}
+
+.announcement-item-message {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.announcement-item-dates {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.announcement-item-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.announcement-item-actions button {
+  background: none;
+  padding: 2px 6px;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.announcement-item-actions button:hover {
+  background-color: var(--border-light);
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
