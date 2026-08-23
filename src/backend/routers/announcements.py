@@ -114,10 +114,14 @@ def update_announcement(announcement_id: str, data: AnnouncementInput, teacher_u
 @router.delete("/{announcement_id}")
 def delete_announcement(announcement_id: str, teacher_username: Optional[str] = Query(None)) -> Dict[str, str]:
     """Delete an announcement - requires teacher authentication"""
-    _require_teacher(teacher_username)
+    teacher = _require_teacher(teacher_username)
 
-    result = announcements_collection.delete_one({"_id": announcement_id})
-    if result.deleted_count == 0:
+    existing = announcements_collection.find_one({"_id": announcement_id})
+    if not existing:
         raise HTTPException(status_code=404, detail="Announcement not found")
 
+    if existing.get("created_by") != teacher.get("username") and teacher.get("role") != "admin":
+        raise HTTPException(status_code=403, detail="Not authorized to delete this announcement")
+
+    announcements_collection.delete_one({"_id": announcement_id})
     return {"message": "Announcement deleted"}
