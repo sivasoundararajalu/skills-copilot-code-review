@@ -93,12 +93,15 @@ def create_announcement(data: AnnouncementInput, teacher_username: Optional[str]
 @router.put("/{announcement_id}", response_model=Dict[str, Any])
 def update_announcement(announcement_id: str, data: AnnouncementInput, teacher_username: Optional[str] = Query(None)) -> Dict[str, Any]:
     """Update an existing announcement - requires teacher authentication"""
-    _require_teacher(teacher_username)
+    teacher = _require_teacher(teacher_username)
     _validate_dates(data)
 
     existing = announcements_collection.find_one({"_id": announcement_id})
     if not existing:
         raise HTTPException(status_code=404, detail="Announcement not found")
+
+    if existing.get("created_by") != teacher.get("username") and teacher.get("role") != "admin":
+        raise HTTPException(status_code=403, detail="Not authorized to update this announcement")
 
     updates = {
         "message": data.message,
